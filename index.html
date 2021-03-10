@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Coin</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+    <script type="text/javascript" src="js/phaser.min.js"></script>
+    <script type="text/javascript">
+        var conf = {
+            screenWidth: 92.5,
+            screenHeight: 52,
+            heatmapTime: 500,
+            sound: 50,
+            gamePause: false,
+            musicList: 0,
+            musicFade: [10, 10]
+        };
+        var gameSet = {
+            width: 1920,
+            height: 1080,
+            field: [{
+                name: 'Lebar Garis',
+                value: 10
+            }, {
+                name: 'Warna',
+                value: '0xe7f1f0'
+            }, {
+                name: 'Latar',
+                value: '#5c7d77'
+            }]
+        }
+        var ball = function(x, y, style, drag, bx) {
+            this.sprite = game.add.sprite(x, y, style);
+            game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
+
+            this.sprite.body.collideWorldBounds = true;
+
+            if (drag) {
+                this.sprite.inputEnabled = true;
+                this.sprite.input.enableDrag();
+                this.sprite.input.priorityID = 10;
+
+                //Jangkauan bola
+                bounds = new Phaser.Rectangle(bx, 106, 960, 974);
+                graphics = game.add.graphics(bounds.x, bounds.y);
+                graphics.beginFill(0x000077);
+                graphics.drawRect(0, 0, bounds.width, bounds.height);
+                graphics.alpha = 0;
+                this.sprite.input.boundsRect = bounds;
+            }
+            return this.sprite
+        }
+    </script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>
